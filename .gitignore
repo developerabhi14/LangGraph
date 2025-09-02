@@ -1,0 +1,11 @@
+.env
+llmenv
+llmenv/*
+books/*
+books/
+chroma_db/
+chroma_db/*
+faiss_index/
+faiss_index/*
+*/__pycache__/*
+*/__pycache__/
