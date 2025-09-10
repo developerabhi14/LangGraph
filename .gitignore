@@ -9,3 +9,6 @@ faiss_index/
 faiss_index/*
 */__pycache__/*
 */__pycache__/
+chatbot*
+chatbot.*
+*/chatbot.*/
