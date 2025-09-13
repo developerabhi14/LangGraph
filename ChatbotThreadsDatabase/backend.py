@@ -1,7 +1,7 @@
 from langgraph.graph import StateGraph, START, END
 from typing import TypedDict, Annotated
 from langchain_core.messages import BaseMessage, HumanMessage
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_huggingface import ChatHuggingFace, HuggingFacePipeline
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.graph.message import add_messages
 from dotenv import load_dotenv
@@ -9,9 +9,16 @@ import sqlite3
 
 load_dotenv()
 
-llm=ChatGoogleGenerativeAI(model='gemini-2.5-flash')
+model=HuggingFacePipeline.from_model_id(
+    model_id="TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+    task="text-generation",
+    pipeline_kwargs=dict(
+        temperature=0.7,  # temperature controls randomness of language model's output. affects creativity and variability.
+    )
 
+)
 
+llm=ChatHuggingFace(llm=model)
 
 class ChatState(TypedDict):
     messages:Annotated[list[BaseMessage], add_messages]
